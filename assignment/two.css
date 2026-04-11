@@ -1,4 +1,4 @@
-/* Smooth animated gradient background */
+/* Animated beautiful background */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -14,7 +14,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Main container (glass effect style) */
+/* Main card container */
 .container {
   max-width: 750px;
   margin: 50px auto;
@@ -25,7 +25,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
-/* Title styling */
+/* Title */
 h1 {
   text-align: center;
   color: #333;
@@ -33,21 +33,21 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* List styling */
+/* Main list */
 .main-list {
   font-size: 18px;
   color: #222;
   line-height: 1.8;
 }
 
-/* Sub lists */
+/* Sub list spacing */
 .main-list ul {
   margin-top: 8px;
   margin-bottom: 15px;
   padding-left: 20px;
 }
 
-/* Links styling */
+/* Links */
 a {
   text-decoration: none;
   color: #0066cc;
@@ -60,7 +60,7 @@ a:hover {
   transform: translateX(5px);
 }
 
-/* Home page button style */
+/* Home button */
 .home-link {
   display: inline-block;
   margin-top: 15px;
