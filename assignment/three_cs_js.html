@@ -39,23 +39,21 @@
 
 <h1 class="center">PRAGATHI K MEHTRY</h1>
 
-<button class="center-btn" onclick="myFunction()">2nd</button>
-
+<button id="myBtn" class="center-btn" onclick="myFunction()">2nd</button>
 <p id="demo" class="align"></p>
 
-<script>
 function myFunction() {
-  let text;
   let year = prompt("Please enter your year:", "2nd");
-  if (year == null || year == "") {
-    text = "User cancelled the prompt.";
-  } else {
-    text = year + " year Student in MITE";
-  }
-  document.getElementById("demo").innerHTML = text;
-}
-</script>
 
+  if (year == null || year == "") {
+    document.getElementById("demo").innerHTML = "User cancelled the prompt.";
+  } else {
+    document.getElementById("demo").innerHTML = year + " year Student in MITE";
+    
+    // change button text
+    document.getElementById("myBtn").innerHTML = year;
+  }
+}
 <h3 style="color: #20B2AA;" class="align">
   have been doing my BE degree in cs department
 </h3>
