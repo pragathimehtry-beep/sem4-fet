@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <title>Assignment 5</title>
 
-  <!-- External CSS -->
   <link rel="stylesheet" href="two.css">
 
-  <!-- Internal CSS (button styling) -->
   <style>
     button {
       display: block;
@@ -32,14 +30,14 @@
 
     <h1>Assignment 5</h1>
 
-    <!-- Skill Checker Button -->
-    <button onclick="checkSkill()">Check Your Skill</button>
+    <!-- Add Skill Button -->
+    <button onclick="addSkill()">Add Your Skill</button>
 
     <ol class="main-list">
 
       <li>
         Languages
-        <ul>
+        <ul id="skillList">
           <li>CSS</li>
           <li>HTML</li>
         </ul>
@@ -67,22 +65,41 @@
 
   <!-- JavaScript -->
   <script>
-    function checkSkill() {
-      let skill = prompt("Enter your skill (HTML, CSS, Java, Python, JavaScript):");
+    function addSkill() {
+      let skill = prompt("Enter a skill to add (HTML, CSS, JavaScript, Python, Java):");
 
       if (!skill) {
-        alert("No input given!");
+        alert("No skill entered!");
         return;
       }
 
-      let skills = ["html", "css", "javascript", "python", "java"];
+      let validSkills = ["html", "css", "javascript", "python", "java"];
 
-      skill = skill.toLowerCase();
+      let lowerSkill = skill.toLowerCase();
 
-      if (skills.includes(skill)) {
-        alert(skill.toUpperCase() + " is a VALID skill!");
+      // check if valid skill
+      if (validSkills.includes(lowerSkill)) {
+
+        // check if already exists
+        let list = document.getElementById("skillList");
+        let items = list.getElementsByTagName("li");
+
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].innerText.toLowerCase() === lowerSkill) {
+            alert("Skill already exists!");
+            return;
+          }
+        }
+
+        // add to list
+        let li = document.createElement("li");
+        li.innerText = skill.toUpperCase();
+        list.appendChild(li);
+
+        alert(skill.toUpperCase() + " added successfully!");
+
       } else {
-        alert(skill + " is NOT in the skill list.");
+        alert("Invalid skill! Not allowed.");
       }
     }
   </script>
