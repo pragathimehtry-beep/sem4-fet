@@ -1,4 +1,4 @@
- <html>
+<html>
 <head>
 <style>
 .center {
@@ -17,7 +17,7 @@
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
-/* Center the button using CSS */
+/* Styled button */
 .center-btn {
   display: block;
   margin: 20px auto;
@@ -27,6 +27,7 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .center-btn:hover {
@@ -40,43 +41,50 @@
 <h1 class="center">PRAGATHI K MEHTRY</h1>
 
 <button id="myBtn" class="center-btn" onclick="myFunction()">2nd</button>
+
 <p id="demo" class="align"></p>
+
 <script>
 function myFunction() {
   let year = prompt("Please enter your year:", "2nd");
 
   if (year == null || year == "") {
     document.getElementById("demo").innerHTML = "User cancelled the prompt.";
+    alert("You cancelled the input!");
   } else {
-    document.getElementById("demo").innerHTML ="";
+    document.getElementById("demo").innerHTML = "";
     
     // change button text
     document.getElementById("myBtn").innerHTML = year;
+
+    // alert message
+    alert("You selected: " + year + " year");
   }
 }
 </script>
+
 <h3 style="color: #20B2AA;" class="align">
 year student in MITE have been doing my BE degree in cs department
 </h3>
 
 <p class="align">
-  have been in journey of completeing my degree in past one and a half year, trying to learn many skills too along with doing my courses,i am moderatly good in different languages such as
+have been in journey of completeing my degree in past one and a half year, trying to learn many skills too along with doing my courses,i am moderatly good in different languages such as
 </p>
 
 <h6 class="imp">JAVA, HTML, PYTHON, CS etc</h6>
 
 <p class="align">
-  i am good in problem solving,critical thinking,have good communication skills.
+i am good in problem solving,critical thinking,have good communication skills.
 </p>
 
 <p class="align">
-  i am a very outgoing person,enjoy trying new things.
+i am a very outgoing person,enjoy trying new things.
 </p>
 
 <h5 class="align">click the link to view my home page.</h5>
 
 <div class="align">
-  <a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/">My Home Page</a>
+<a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/">My Home Page</a>
 </div>
 
 </body>
