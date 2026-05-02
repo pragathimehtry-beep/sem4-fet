@@ -1,1 +1,211 @@
+<html>
+<head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #f0f9ff);
+  }
 
+  h2 {
+    text-align: center;
+    margin-top: 30px;
+    color: #1f2937;
+  }
+
+  form {
+    width: 420px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 14px 0;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+
+  input:focus, select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59,130,246,0.3);
+  }
+
+  /* ROW STYLE (used for name + course type) */
+  .row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .row input {
+    width: 100%;
+  }
+
+  .inline {
+    width: auto;
+    margin-right: 6px;
+  }
+
+  .radio-group, .checkbox-group {
+    margin-bottom: 12px;
+  }
+
+  .checkbox-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #374151;
+  }
+
+  button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .submit-btn {
+    background: #22c55e;
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .submit-btn:hover {
+    background: #16a34a;
+  }
+
+  .reset-btn {
+    background: #ef4444;
+    color: white;
+  }
+
+  .reset-btn:hover {
+    background: #dc2626;
+  }
+
+  #output {
+    width: 420px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    color: #111827;
+  }
+</style>
+
+<script>
+function saveData(event) {
+  event.preventDefault();
+
+  let fname = document.getElementById("fname").value;
+  let lname = document.getElementById("lname").value;
+  let dob = document.getElementById("dob").value;
+  let email = document.getElementById("email").value;
+
+  let gender = document.querySelector('input[name="gender"]:checked');
+  gender = gender ? gender.value : "Not selected";
+
+  let course = [];
+  document.querySelectorAll('input[name="course"]:checked').forEach(el => {
+    course.push(el.value);
+  });
+
+  let branch = document.getElementById("branch").value;
+
+  let timings = Array.from(document.getElementById("timings").selectedOptions)
+    .map(opt => opt.value);
+
+  document.getElementById("output").innerHTML =
+    "<h3>Submitted Details</h3>" +
+    "Name: " + fname + " " + lname + "<br>" +
+    "DOB: " + dob + "<br>" +
+    "Email: " + email + "<br>" +
+    "Gender: " + gender + "<br>" +
+    "Branch: " + branch + "<br>" +
+    "Course Type: " + course.join(", ") + "<br>" +
+    "Preferred Timings: " + timings.join(", ");
+}
+
+function resetForm() {
+  document.getElementById("myForm").reset();
+  document.getElementById("output").innerHTML = "";
+}
+</script>
+</head>
+
+<body>
+
+<h2>College Admission Form</h2>
+
+<form id="myForm" onsubmit="saveData(event)">
+
+  <!-- Name row -->
+  <div class="row">
+    <input type="text" id="fname" placeholder="First Name" required>
+    <input type="text" id="lname" placeholder="Last Name" required>
+  </div>
+
+  <input type="date" id="dob" required>
+  <input type="email" id="email" placeholder="Email" required>
+
+  <!-- Gender -->
+  <div class="radio-group">
+    <div class="section-title">Gender</div>
+    <input type="radio" name="gender" value="Male" class="inline"> Male
+    <input type="radio" name="gender" value="Female" class="inline"> Female
+    <input type="radio" name="gender" value="Other" class="inline"> Other
+  </div>
+
+  <!-- Course Type in one line -->
+  <div class="checkbox-group">
+    <div class="section-title">Course Type</div>
+    <div class="checkbox-row">
+      <label><input type="checkbox" name="course" value="Full Time"> Full Time</label>
+      <label><input type="checkbox" name="course" value="Online"> Online</label>
+    </div>
+  </div>
+
+  <!-- Branch -->
+  <select id="branch" required>
+    <option value="">Select Branch</option>
+    <option value="CS">CS</option>
+    <option value="IS">IS</option>
+    <option value="EC">EC</option>
+    <option value="AERO">AERO</option>
+  </select>
+
+  <!-- Timings -->
+  <div class="section-title">Preferred Timings</div>
+  <select id="timings" multiple size="3">
+    <option value="Morning">Morning</option>
+    <option value="Afternoon">Afternoon</option>
+       <option value="Afternoon">Evening</option>
+  </select>
+
+  <button type="submit" class="submit-btn">Submit</button>
+  <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
+
+</form>
+
+<div id="output"></div>
+
+</body>
+</html>
