@@ -3,114 +3,117 @@
 <head>
   <style>
     body {
-      background-color: #F0FFFF;
       margin: 0;
       padding: 0;
+      background-color: #F0FFFF;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
       position: relative;
-      overflow-x: hidden;
+      height: 100vh;
     }
 
-    /* Background decorative boxes using z-index */
-    .bg-box1 {
+    /* CENTER SHAPES USING STACK ORDER */
+
+    /* Bottom Circle */
+    .circle {
       position: absolute;
-      top: 40px;
-      left: 40px;
-      width: 200px;
-      height: 200px;
+      width: 420px;
+      height: 420px;
+      background-color: mistyrose;
+      border-radius: 100%;
+      top: 50%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    /* Middle Square */
+    .square {
+      position: absolute;
+      width: 340px;
+      height: 340px;
       background-color: #B0E0E6;
       border-radius: 20px;
-      z-index: 1;
-      opacity: 0.4;
+      top: 50%;
+      left: 60%;
+      transform: translate(-50%, -50%) rotate(15deg);
+      z-index: 2;
+      opacity: 0.6;
     }
 
-    .bg-box2 {
-      position: absolute;
-      bottom: 50px;
-      right: 50px;
-      width: 250px;
-      height: 250px;
-      background-color: #AFEEEE;
-      border-radius: 50%;
-      z-index: 1;
-      opacity: 0.4;
-    }
-
-    /* Main content */
+    /* Top Content */
     .content {
       position: relative;
-      z-index: 2;
-      padding: 40px;
+      z-index: 3;
+      text-align: center;
+      padding: 80px;
     }
 
-    .center {
-      text-align: center;
+    .title {
       color: #48CCCD;
     }
 
-    .align {
-      text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
+    .subtitle {
+      color: #20B2AA;
     }
 
-    .imp {
-      text-align: center;
-      color: #20B2AA;
-      font-family: "Lucida Console", "Courier New", monospace;
+    .skills {
+      color: #008B8B;
+      font-family: "Lucida Console", monospace;
     }
 
     a {
-      color: #008B8B;
+      color: #006666;
       text-decoration: none;
       font-weight: bold;
     }
 
     a:hover {
-      color: #006666;
+      color: #004C4C;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Background Shapes -->
-  <div class="bg-box1"></div>
-  <div class="bg-box2"></div>
+  <!-- Center Background Shapes -->
+  <div class="circle"></div>
+  <div class="square"></div>
 
   <!-- Main Content -->
   <div class="content">
 
-    <h1 class="center">PRAGATHI K MEHTRY</h1>
+    <h1 class="title">PRAGATHI K MEHTRY</h1>
 
-    <h3 style="color: #20B2AA;" class="align">
-      2nd year student in MITE, have been doing my BE degree in CS department
+    <h3 class="subtitle">
+      2nd year student in MITE, pursuing BE degree in CS department
     </h3>
 
-    <p class="align">
-      Have been in the journey of completing my degree in the past one and a half year,
-      trying to learn many skills too along with doing my courses. I am moderately good
-      in different languages such as
+    <p>
+      I have been on the journey of completing my degree for the past one and a half years,
+      while also learning many new skills along with academics.
     </p>
 
-    <h6 class="imp">JAVA, HTML, PYTHON, C, etc.</h6>
+    <p>I am moderately good in different programming languages such as:</p>
 
-    <p class="align">
-      I am good in problem solving, critical thinking, and have good communication skills.
+    <h4 class="skills">JAVA, HTML, PYTHON, C, etc.</h4>
+
+    <p>
+      I am good at problem solving, critical thinking, and communication skills.
     </p>
 
-    <p class="align">
-      I am a very outgoing person and enjoy trying new things.
+    <p>
+      I am an outgoing person and enjoy trying new things.
     </p>
 
-    <h5 class="align">Click the link to view my home page.</h5>
+    <h4>Click the link below to view my home page</h4>
 
-    <div class="align">
-      <a href="https://pragathimehtry-beep.github.io/sem4-fet/">
-        My Home Page
-      </a>
-    </div>
+    <a href="https://pragathimehtry-beep.github.io/sem4-fet/" target="_blank">
+      My Home Page
+    </a>
 
   </div>
 
 </body>
 </html>
-
