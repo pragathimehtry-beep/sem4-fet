@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 5</title>
+
+  <link rel="stylesheet" href="two.css">
+
+  <style>
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #20B2AA;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #48CCCD;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Assignment 5</h1>
+
+    <!-- Add Skill Button -->
+    <button onclick="addSkill()">Add Your Skill</button>
+
+    <ol class="main-list">
+
+      <li>
+        Languages
+        <ul id="skillList">
+          <li>CSS</li>
+          <li>HTML</li>
+        </ul>
+      </li>
+
+      <li>
+        My Assignments in HTML
+        <ul>
+          <li><a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/one.html">Assignment 1</a></li>
+          <li><a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/two.html">Assignment 2</a></li>
+          <li><a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/three.html">Assignment 3</a></li>
+          <li><a href="https://pragathimehtry-beep.github.io/sem4-fet/assignment/four.html">Assignment 4</a></li>
+        </ul>
+      </li>
+
+    </ol>
+
+    <h5>Click the link to view my home page:</h5>
+
+    <a class="home-link" href="https://pragathimehtry-beep.github.io/sem4-fet/">
+      My Home Page
+    </a>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    function addSkill() {
+
+      let skill;
+
+      // do while loop
+      do {
+        skill = prompt("Enter a skill to add (HTML, CSS, JavaScript, Python, Java):");
+
+        if (skill === null) {
+          alert("Cancelled!");
+          return;
+        }
+
+      } while (skill.trim() === "");
+
+      let validSkills = ["html", "css", "javascript", "python", "java"];
+
+      let lowerSkill = skill.toLowerCase();
+
+      // check if valid skill
+      if (validSkills.includes(lowerSkill)) {
+
+        let list = document.getElementById("skillList");
+        let items = list.getElementsByTagName("li");
+
+        let i = 0;
+        let exists = false;
+
+        // while loop
+        while (i < items.length) {
+
+          if (items[i].innerText.toLowerCase() === lowerSkill) {
+            exists = true;
+            break;
+          }
+
+          i++;
+        }
+
+        if (exists) {
+          alert("Skill already exists!");
+          return;
+        }
+
+        // add new skill
+        let li = document.createElement("li");
+        li.innerText = skill.toUpperCase();
+
+        list.appendChild(li);
+
+        alert(skill.toUpperCase() + " added successfully!");
+
+      } else {
+        alert("Invalid skill! Not allowed.");
+      }
+    }
+
+  </script>
+
+</body>
+</html>
