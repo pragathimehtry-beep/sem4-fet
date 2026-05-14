@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Dropdown & ListBox</title>
 
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Course Selection</h2>
+
+<!-- Dropdown -->
+<select id="course" onchange="updateList()">
+    <option value="">Select Course</option>
+    <option value="web">Web</option>
+    <option value="prog">Programming</option>
+</select>
+
+<!-- List Box -->
+<select id="listbox" multiple size="4"></select>
+
+<button id="btn">Show Selected</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+    const data = {
+        web: ["HTML", "CSS", "JS"],
+        prog: ["C", "Java", "Python"]
+    };
+
+    function updateList() {
+        let course = document.getElementById("course").value;
+        let list = document.getElementById("listbox");
+
+        list.innerHTML = "";
+
+        if (data[course]) {
+            data[course].forEach(function(item) {
+                let option = document.createElement("option");
+                option.text = item;
+                list.add(option);
+            });
+        }
+    }
+
+    document.getElementById("btn").addEventListener("click", function() {
+        let list = document.getElementById("listbox");
+        let selected = [];
+
+        for (let i = 0; i < list.options.length; i++) {
+            if (list.options[i].selected) {
+                selected.push(list.options[i].text);
+            }
+        }
+
+        document.getElementById("result").innerText =
+            "Selected: " + selected.join(", ");
+    });
+</script>
+
+</body>
+</html>
