@@ -26,7 +26,7 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 10px;
       margin: 8px 0 14px 0;
@@ -38,12 +38,11 @@
       box-sizing: border-box;
     }
 
-    input:focus, select:focus {
+    input:focus {
       border-color: #3b82f6;
       box-shadow: 0 0 5px rgba(59,130,246,0.3);
     }
 
-    /* Name row */
     .row {
       display: flex;
       gap: 10px;
@@ -53,27 +52,28 @@
       width: 100%;
     }
 
+    fieldset {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+
+    legend {
+      font-weight: bold;
+      color: #374151;
+      padding: 0 5px;
+    }
+
     .inline {
       width: auto;
       margin-right: 6px;
     }
 
-    .radio-group,
-    .checkbox-group {
-      margin-bottom: 12px;
-    }
-
     .checkbox-row {
       display: flex;
       gap: 20px;
-      align-items: center;
-    }
-
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #374151;
+      margin-top: 10px;
     }
 
     button {
@@ -125,19 +125,25 @@
       let dob = document.getElementById("dob").value;
       let email = document.getElementById("email").value;
 
-      let gender = document.querySelector('input[name="gender"]:checked');
-      gender = gender ? gender.value : "Not selected";
+      // Gender using for loop
+      let gender = "Not selected";
+      let genderOptions = document.getElementsByName("gender");
 
+      for (let i = 0; i < genderOptions.length; i++) {
+        if (genderOptions[i].checked) {
+          gender = genderOptions[i].value;
+        }
+      }
+
+      // Course Type using for loop
       let course = [];
-      document.querySelectorAll('input[name="course"]:checked').forEach(el => {
-        course.push(el.value);
-      });
+      let courseOptions = document.getElementsByName("course");
 
-      let branch = document.getElementById("branch").value;
-
-      let timings = Array.from(
-        document.getElementById("timings").selectedOptions
-      ).map(opt => opt.value);
+      for (let i = 0; i < courseOptions.length; i++) {
+        if (courseOptions[i].checked) {
+          course.push(courseOptions[i].value);
+        }
+      }
 
       document.getElementById("output").innerHTML =
         "<h3>Submitted Details</h3>" +
@@ -145,9 +151,7 @@
         "<b>DOB:</b> " + dob + "<br><br>" +
         "<b>Email:</b> " + email + "<br><br>" +
         "<b>Gender:</b> " + gender + "<br><br>" +
-        "<b>Branch:</b> " + branch + "<br><br>" +
-        "<b>Course Type:</b> " + course.join(", ") + "<br><br>" +
-        "<b>Preferred Timings:</b> " + timings.join(", ");
+        "<b>Course Type:</b> " + course.join(", ");
     }
 
     function resetForm() {
@@ -155,7 +159,6 @@
       document.getElementById("output").innerHTML = "";
     }
 
-    /* Event Listeners */
     window.onload = function () {
       document.getElementById("myForm")
         .addEventListener("submit", saveData);
@@ -185,9 +188,9 @@
     <!-- Email -->
     <input type="email" id="email" placeholder="Email" required>
 
-    <!-- Gender -->
-    <div class="radio-group">
-      <div class="section-title">Gender</div>
+    <!-- Gender Fieldset -->
+    <fieldset>
+      <legend>Gender</legend>
 
       <label>
         <input type="radio" name="gender" value="Male" class="inline">
@@ -203,11 +206,11 @@
         <input type="radio" name="gender" value="Other" class="inline">
         Other
       </label>
-    </div>
+    </fieldset>
 
-    <!-- Course Type -->
-    <div class="checkbox-group">
-      <div class="section-title">Course Type</div>
+    <!-- Course Type Fieldset -->
+    <fieldset>
+      <legend>Course Type</legend>
 
       <div class="checkbox-row">
         <label>
@@ -220,27 +223,7 @@
           Online
         </label>
       </div>
-    </div>
-
-    <!-- Branch Dropdown -->
-    <div class="section-title">Select Branch</div>
-
-    <select id="branch" required>
-      <option value="">Select Branch</option>
-      <option value="CS">CS</option>
-      <option value="IS">IS</option>
-      <option value="EC">EC</option>
-      <option value="AERO">AERO</option>
-    </select>
-
-    <!-- List Box -->
-    <div class="section-title">Preferred Timings</div>
-
-    <select id="timings" multiple size="3">
-      <option value="Morning">Morning</option>
-      <option value="Afternoon">Afternoon</option>
-      <option value="Evening">Evening</option>
-    </select>
+    </fieldset>
 
     <!-- Buttons -->
     <button type="submit" class="submit-btn">
