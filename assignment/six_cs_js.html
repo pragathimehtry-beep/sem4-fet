@@ -1,119 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Admission Form</title>
+
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background-color: #F0FFFF;
-      overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
-      position: relative;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
-    /* CENTER SHAPES USING STACK ORDER */
-
-    /* Bottom Circle */
-    .circle {
+    /* Background circles */
+    .circle1,
+    .circle2 {
       position: absolute;
-      width: 420px;
-      height: 420px;
-      background-color: mistyrose;
-      border-radius: 100%;
-      top: 50%;
-      left: 40%;
-      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      opacity: 0.4;
       z-index: 1;
-      opacity: 0.5;
     }
 
-    /* Middle Square */
-    .square {
-      position: absolute;
-      width: 440px;
-      height: 340px;
-      background-color: #B0E0E6;
-      border-radius: 20px;
-      top: 50%;
-      left: 60%;
-      transform: translate(-50%, -50%) rotate(15deg);
-      z-index: 2;
-      opacity: 0.6;
+    .circle1 {
+      width: 250px;
+      height: 250px;
+      background: white;
+      top: 40px;
+      left: 80px;
     }
 
-    /* Top Content */
-    .content {
+    .circle2 {
+      width: 300px;
+      height: 300px;
+      background: yellow;
+      bottom: 30px;
+      right: 60px;
+    }
+
+    /* Form container */
+    .form-container {
       position: relative;
-      z-index: 3;
+      z-index: 10; /* Form appears above circles */
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .form-container h2 {
       text-align: center;
-      padding: 80px;
+      margin-bottom: 20px;
+      color: #333;
     }
 
-    .title {
-      color: #48CCCD;
+    .input-group {
+      margin-bottom: 15px;
     }
 
-    .subtitle {
-      color: #20B2AA;
-    }
-
-    .skills {
-      color: #008B8B;
-      font-family: "Lucida Console", monospace;
-    }
-
-    a {
-      color: #006666;
-      text-decoration: none;
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
       font-weight: bold;
     }
 
-    a:hover {
-      color: #004C4C;
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    /* Success popup */
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 100; /* Above everything */
+      display: none;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Center Background Shapes -->
-  <div class="circle"></div>
-  <div class="square"></div>
+  <!-- Background Shapes -->
+  <div class="circle1"></div>
+  <div class="circle2"></div>
 
-  <!-- Main Content -->
-  <div class="content">
+  <!-- Admission Form -->
+  <div class="form-container">
+    <h2>College Admission Form</h2>
 
-    <h1 class="title">PRAGATHI K MEHTRY</h1>
+    <form id="admissionForm">
+      
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="name" required>
+      </div>
 
-    <h3 class="subtitle">
-      2nd year student in MITE, pursuing BE degree in CS department
-    </h3>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="email" required>
+      </div>
 
-    <p>
-      I have been on the journey of completing my degree for the past one and a half years,
-      while also learning many new skills along with academics.
-    </p>
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required>
+      </div>
 
-    <p>I am moderately good in different programming languages such as:</p>
+      <div class="input-group">
+        <label>Course</label>
+        <select id="course" required>
+          <option value="">Select Course</option>
+          <option>BCA</option>
+          <option>BBA</option>
+          <option>B.Tech</option>
+          <option>MBA</option>
+        </select>
+      </div>
 
-    <h4 class="skills">JAVA, HTML, PYTHON, C, etc.</h4>
+      <button type="submit" class="btn">Submit Application</button>
 
-    <p>
-      I am good at problem solving, critical thinking, and communication skills.
-    </p>
-
-    <p>
-      I am an outgoing person and enjoy trying new things.
-    </p>
-
-    <h4>Click the link below to view my home page</h4>
-
-    <a href="https://pragathimehtry-beep.github.io/sem4-fet/" target="_blank">
-      My Home Page
-    </a>
-
+    </form>
   </div>
+
+  <!-- Popup Message -->
+  <div class="popup" id="popup">
+    Admission Form Submitted Successfully!
+  </div>
+
+  <script>
+    const form = document.getElementById("admissionForm");
+    const popup = document.getElementById("popup");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.style.display = "none";
+        form.reset();
+      }, 3000);
+    });
+  </script>
 
 </body>
 </html>
