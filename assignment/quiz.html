@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quiz with Explanations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        text-align: center;
+    }
+
+    header {
+        padding: 20px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .card {
+        max-width: 600px;
+        margin: auto;
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 15px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: mistyrose;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .timer {
+        color: #facc15;
+        font-weight: bold;
+    }
+
+    .answer-box {
+        text-align: left;
+        margin-top: 15px;
+    }
+
+    .qblock {
+        margin-bottom: 15px;
+        padding: 10px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+
+    .correct {
+        color: #22c55e;
+        font-weight: bold;
+    }
+
+</style>
+</head>
+
+<body>
+
+<header> Fun QUIZZ game</header>
+
+<!-- QUIZ -->
+<div class="card" id="quizBox">
+
+    <div class="top">
+        <div>Score: <span id="score">0</span></div>
+        <div class="timer">Time: <span id="time">10</span>s</div>
+    </div>
+
+    <h2 id="question">Question</h2>
+    <div id="options"></div>
+
+    <button onclick="nextQuestion()">Skip ➜</button>
+</div>
+
+<!-- RESULT -->
+<div class="card hidden" id="resultBox">
+    <h2>🏆 Quiz Finished!</h2>
+    <h3>Your Score: <span id="finalScore"></span></h3>
+
+    <div class="answer-box" id="answers"></div>
+
+    <button onclick="restartQuiz()">Restart Quiz</button>
+</div>
+
+<script>
+
+const quiz = [
+    {
+        q: "What is the capital of India?",
+        options: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
+        answer: 1,
+        explanation: "Delhi is the capital of India because it is the seat of government and Parliament."
+    },
+    {
+        q: "2 + 2 = ?",
+        options: ["3", "6", "5", "4"],
+        answer: 3,
+        explanation: "Basic arithmetic: 2 + 2 equals 4."
+    },
+    {
+        q: "Which planet is known as the Red Planet?",
+        options: ["Earth", "Venus ", "Mars", "Jupiter"],
+        answer: 2,
+        explanation: "Mars is called the Red Planet due to iron oxide (rust) on its surface."
+    },
+    {
+        q: "HTML stands for?",
+        options: [
+            "Hyper Trainer Marking Language",
+            "Hyper Text Markup Language",
+            "Hyper Text Makeup Language",
+            "High Text Machine Language"
+        ],
+        answer: 1,
+        explanation: "HTML stands for Hyper Text Markup Language, used to build web pages."
+    }
+];
+
+let current = 0;
+let score = 0;
+let time = 20;
+let timer;
+
+let userAnswers = [];
+
+function loadQuestion(){
+    clearInterval(timer);
+    time = 20;
+    document.getElementById("time").innerText = time;
+
+    timer = setInterval(()=>{
+        time--;
+        document.getElementById("time").innerText = time;
+
+        if(time === 0){
+            nextQuestion(null);
+        }
+    },1000);
+
+    let q = quiz[current];
+
+    document.getElementById("question").innerText = q.q;
+
+    let optDiv = document.getElementById("options");
+    optDiv.innerHTML = "";
+
+    q.options.forEach((opt,i)=>{
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+
+        btn.onclick = ()=>{
+            checkAnswer(i);
+        };
+
+        optDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(i){
+    let q = quiz[current];
+
+    let isCorrect = i === q.answer;
+
+    if(isCorrect){
+        score++;
+        document.getElementById("score").innerText = score;
+    }
+
+    userAnswers.push({
+        question: q.q,
+        selected: q.options[i],
+        correct: q.options[q.answer],
+        explanation: q.explanation,
+        isCorrect: isCorrect
+    });
+
+    nextQuestion();
+}
+
+function nextQuestion(){
+    current++;
+
+    if(current >= quiz.length){
+        endQuiz();
+        return;
+    }
+
+    loadQuestion();
+}
+
+function endQuiz(){
+    clearInterval(timer);
+
+    document.getElementById("quizBox").classList.add("hidden");
+    document.getElementById("resultBox").classList.remove("hidden");
+
+    document.getElementById("finalScore").innerText = score;
+
+    let ansDiv = document.getElementById("answers");
+    ansDiv.innerHTML = "<h3>📘 Answers & Explanations</h3>";
+
+    userAnswers.forEach((a, i)=>{
+        ansDiv.innerHTML += `
+            <div class="qblock">
+                <p><b>Q${i+1}:</b> ${a.question}</p>
+                <p>Your Answer: ${a.selected}</p>
+                <p class="correct">Correct Answer: ${a.correct}</p>
+                <p>📘 ${a.explanation}</p>
+            </div>
+        `;
+    });
+}
+
+function restartQuiz(){
+    current = 0;
+    score = 0;
+    userAnswers = [];
+
+    document.getElementById("score").innerText = score;
+    document.getElementById("quizBox").classList.remove("hidden");
+    document.getElementById("resultBox").classList.add("hidden");
+
+    loadQuestion();
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
