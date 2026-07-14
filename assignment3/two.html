@@ -1,53 +1,24 @@
-
-
+<!DOCTYPE html>
 <html>
 <head>
-    <title>XHTML with External CSS</title>
-
-    <!-- External Style Sheet -->
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Fibonacci and Factorial</title>
+    <script src="script.js"></script>
 </head>
 
 <body>
 
-<h2>Student Information</h2>
+<div class="container">
+    <h2>Fibonacci and Factorial Calculator</h2>
 
-<h3>Ordered List</h3>
-<ol>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-    <li>XML</li>
-    <li>XHTML</li>
-</ol>
+    <label>Enter a number (1-10):</label><br><br>
 
-<h3>Student Table</h3>
+    <input type="number" id="num" min="1" max="10">
+    <br><br>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Course</th>
-        <th>Marks</th>
-    </tr>
+    <button onclick="calculate()">Submit</button>
 
-    <tr>
-        <td>Rahul</td>
-        <td>CSE</td>
-        <td><span class="highlight">90</span></td>
-    </tr>
-
-    <tr>
-        <td>Anjali</td>
-        <td>ECE</td>
-        <td><span class="highlight">88</span></td>
-    </tr>
-
-    <tr>
-        <td>Ravi</td>
-        <td>ISE</td>
-        <td><span class="highlight">92</span></td>
-    </tr>
-</table>
+    <div id="output"></div>
+</div>
 
 </body>
 </html>
